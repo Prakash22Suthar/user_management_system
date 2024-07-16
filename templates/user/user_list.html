@@ -1,0 +1,48 @@
+{% extends 'user/user_base.html' %}
+{% load static %}
+
+{% block container_block %}
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-6">
+
+        </div>
+        <div class="col-6 text-end">
+            <a class="btn btn-secondary" href="{% url 'users:add_user' %}"> Add User</a><br>
+        </div>   
+    </div>
+    <div class="row">
+        <table id="user_list_table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Is_Active</th>
+                    <th>Is_Staff</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td><img src="{% if user.profile_photo %} '{{user.profile_photo.url}} {% else %} {% static 'assets/images/faces-clipart/pic-1.png ' %} {% endif %}" alt="image"></td>
+                    <td><a class="text-black text-decoration-none" href="{% url 'users:user_details' user.id %}">{{user.username}}</a></td>
+                    <td>{% if user.email %}{{user.email}} {% else %} - {% endif %}</td>
+                    <td>{{user.is_active}}</td>
+                    <td>{{user.is_staff}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>   
+{% endblock container_block %}
+
+{% block script_block %}
+<script>
+    $(document).ready( function () {
+        $('#user_list_table').DataTable();
+    } );
+</script>
+{% endblock script_block %}

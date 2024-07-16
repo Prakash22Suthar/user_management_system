@@ -1,0 +1,124 @@
+{% extends 'user/user_base.html' %}
+{% load static %}
+
+{% block container_block %}
+
+<div class="content-wrapper">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <h4 class="card-title">{% if is_update %} Update {% else %} Add New {% endif %} User</h4>
+            </div>
+        </div>
+        <form class="form-sample" method="post" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            <br>
+            {% comment %} <p class="card-description"> Personal info </p> {% endcomment %}
+            <div class="row">
+                <div class="form-group d-flex text-center justify-content-center align-items-center">
+                    <div class="upload_photo d-flex align-items-center justify-content-center border position-relative w-25 h-25 rounded-circle cursor-pointer" style="border-color: #2D3D95; height:90px !important; border-style: dashed !important; font-size: 12px; cursor:pointer; position: absolute !important; margin-bottom: 70px; margin-left: 800px;">
+                    {% if form.current_profile_photo.value %}
+                        <img src="{{ form.current_profile_photo.value }}" alt="Current Profile Photo"  class="img-fluid rounded-circle" style="width: 90px; height: 90px; ">
+                    {% else %}
+                        Your <br>Photo
+                    {% endif %}
+                {% comment %} {{form.profile_photo}} {% endcomment %}
+                <input type="file" id="id_profile_photo" name="profile_photo" style="display: none;">
+        
+                  </div>
+                  
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">First Name</label>
+                    <div class="col-sm-9">
+                    {{form.first_name}}
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Last Name</label>
+                    <div class="col-sm-9">
+                        {{form.last_name}}
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Username</label>
+                    <div class="col-sm-9">
+                        {{form.username}}
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">E-mail</label>
+                    <div class="col-sm-9">
+                        {{form.email}}
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">password</label>
+                        <div class="col-sm-9">
+                            {{form.password}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Is Active</label>
+                    <div class="col-sm-9">
+                    {{form.is_active}}
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Is Staff</label>
+                    <div class="col-sm-9">
+                        {{form.is_staff}}
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row text-end">
+                <div class="col-8">
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary" type="submit">{% if is_update %} Update {% else %} Add New {% endif %} User</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock container_block %}
+
+
+
+{% block script_block %}
+
+{% comment %} <script>
+    $(document).ready(function(){
+        const input = document.getElementById('id_profile_photo');
+        if (input.files && input.files.length > 0) {
+            const filePath = input.files[0].name; // or use input.files[0].path in some cases
+            alert("Selected file path: " + filePath);
+        } else {
+            alert("No file selected");
+        }
+    })
+</script> {% endcomment %}
+<script src="{% static 'script/upload_photo.js' %}"></script>
+{% endblock script_block %}

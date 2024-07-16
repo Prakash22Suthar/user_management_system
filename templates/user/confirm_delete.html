@@ -1,0 +1,13 @@
+{% extends 'user/user_base.html' %}
+{% load static %}
+
+{% block container_block %}
+<h1 style="margin-top: 10px;"> Are you sure, Delete "{{user|title}}" ?</h1>
+<form method="post">
+    {% csrf_token %}
+    <br><br>
+    <input type="submit" class="btn btn-danger" value="Delete">
+    {% comment %} <a href="{% url 'Company:detail' pk=company.pk %}">Cancel</a> {% endcomment %}
+</form>
+{% endblock container_block %}
+
