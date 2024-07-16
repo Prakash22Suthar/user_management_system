@@ -1,0 +1,56 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block body %}    
+  <div class="container-fluid page-body-wrapper full-page-wrapper">
+    <div class="content-wrapper d-flex align-items-center auth">
+      <div class="row flex-grow">
+        <div class="col-lg-4 mx-auto">
+          <div class="auth-form-light text-left p-5">
+            <div class="brand-logo">
+              <img src="{% static 'assets/images/logo.svg' %}">
+            </div>
+            <h4>New here?</h4>
+            <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+            <form class="pt-3"  method="post" novalidate enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group d-flex text-center justify-content-center align-items-center">
+                {{form.profile_photo}}
+                  <div class="upload_photo d-flex align-items-center justify-content-center border position-relative w-25 h-25 rounded-circle cursor-pointer" style="border-color: #2D3D95; height:70px !important; border-style: dashed !important; font-size: 12px; cursor:pointer">
+                    Your <br>Photo
+                  </div>
+                  
+              </div>
+              <div class="form-group">
+                {{form.username}}
+              </div>
+              <div class="form-group">
+                {{form.email}}
+              </div>
+              <div class="form-group">
+                {{form.password}}
+              </div>
+              {% comment %} <div class="form-group">
+                {{form.is_staff}} is_staff
+              </div>
+              
+              <div class="form-group">
+                {{form.is_active}} is_active
+              </div> {% endcomment %}
+              <div class="mt-3 d-grid gap-2">
+                <input class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" type="submit" value="SignUp">
+              </div>
+              <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="{% url 'base:login' %}" class="text-primary">Login</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- content-wrapper ends -->
+  </div>
+{% endblock body %}
+
+
+{% block script_block %}
+<script src="{% static 'script/upload_photo.js' %}"></script>
+{% endblock script_block %}

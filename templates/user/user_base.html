@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block style_block %}
+{% endblock style_block %}
+
+
+{% block body %}
+
+{% include "base/header.html" %}
+            
+<div class="container-fluid page-body-wrapper">
+    {% include 'base/left_sidebar.html' %}
+    <div class="main-panel">
+            {% block container_block %} 
+            {% endblock container_block %}
+        {% include "base/footer.html" %}
+    </div>
+</div>
+{% endblock body %}
+
